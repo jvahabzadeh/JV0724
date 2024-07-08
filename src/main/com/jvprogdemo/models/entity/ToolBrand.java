@@ -1,4 +1,4 @@
-package com.jvprogdemo.entity;
+package com.jvprogdemo.models.entity;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package com.jvprogdemo.dao;
 
-import com.jvprogdemo.entity.AbstractEntity;
+import com.jvprogdemo.models.entity.AbstractEntity;
 
 import java.util.Collection;
 

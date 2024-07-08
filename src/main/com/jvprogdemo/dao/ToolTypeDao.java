@@ -1,6 +1,6 @@
 package com.jvprogdemo.dao;
 
-import com.jvprogdemo.entity.ToolType;
+import com.jvprogdemo.models.entity.ToolType;
 
 import java.math.BigDecimal;
 import java.util.Collection;

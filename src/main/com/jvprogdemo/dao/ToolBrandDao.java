@@ -1,6 +1,6 @@
 package com.jvprogdemo.dao;
 
-import com.jvprogdemo.entity.ToolBrand;
+import com.jvprogdemo.models.entity.ToolBrand;
 
 import java.util.Collection;
 import java.util.Set;
