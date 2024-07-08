@@ -3,7 +3,7 @@ package com.jvprogdemo.entity;
 import java.util.Objects;
 
 public class ToolBrand extends AbstractEntity {
-	private String brandName;
+	private final String brandName;
 	// I'm sure there'd be more information than just the company name in a real-world scenario
 
 	public ToolBrand(String brandName) {

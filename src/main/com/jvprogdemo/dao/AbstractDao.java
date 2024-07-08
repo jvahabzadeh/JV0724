@@ -2,7 +2,7 @@ package com.jvprogdemo.dao;
 
 import com.jvprogdemo.entity.AbstractEntity;
 
-import java.util.Map;
+import java.util.Collection;
 
 public abstract class AbstractDao<T extends AbstractEntity> {
 	// I'm assuming that tool, tool type, and tool brand information would be pulled from a database that exists
@@ -24,5 +24,5 @@ public abstract class AbstractDao<T extends AbstractEntity> {
 	//      ToolBrand   Varchar(50)     not-null        PK
 	//		(other columns related to the brand)
 
-	public abstract Map<String, T> getEntityMap();
+	public abstract Collection<T> getEntities();
 }

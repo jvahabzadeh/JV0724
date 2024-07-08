@@ -3,32 +3,32 @@ package com.jvprogdemo.entity;
 import java.util.Objects;
 
 public class Tool extends AbstractEntity {
-    private final String toolCode;
-    private final ToolType toolType;
-    private final ToolBrand toolBrand;
+    private final String code;
+    private final String type;
+    private final String brand;
 
-    public Tool(String toolCode, ToolType toolType, ToolBrand toolBrand) {
-        if (toolCode == null || toolCode.isBlank()) {
-            throw new IllegalArgumentException("Tool may not have a NULL or blank tool code.");
+    public Tool(String code, String type, String brand) {
+        if (code == null || code.isBlank()) {
+            throw new IllegalArgumentException("Tool may not have a NULL or blank Code.");
         }
-        if (toolType == null) {
-            throw new IllegalArgumentException("Tool Type may not be NULL.");
+        if (type == null || type.isBlank()) {
+            throw new IllegalArgumentException("Tool may not have a NULL or blank Type.");
         }
-        if (toolBrand == null) {
-            throw new IllegalArgumentException("Tool Brand may not be NULL.");
+        if (brand == null || brand.isBlank()) {
+            throw new IllegalArgumentException("Tool may not have a NULL or blank Brand.");
         }
-        this.toolCode = toolCode;
-        this.toolType = toolType;
-        this.toolBrand = toolBrand;
+        this.code = code;
+        this.type = type;
+        this.brand = brand;
     }
-    public String getToolCode() {
-        return toolCode;
+    public String getCode() {
+        return code;
     }
-    public ToolType getToolType() {
-        return toolType;
+    public String getType() {
+        return type;
     }
-    public ToolBrand getToolBrand() {
-        return toolBrand;
+    public String getBrand() {
+        return brand;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class Tool extends AbstractEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tool tool = (Tool) o;
-        return Objects.equals(toolCode, tool.toolCode);
+        return Objects.equals(code, tool.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(toolCode);
+        return Objects.hashCode(code);
     }
 }
