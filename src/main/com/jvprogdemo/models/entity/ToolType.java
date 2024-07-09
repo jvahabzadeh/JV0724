@@ -49,6 +49,11 @@ public class ToolType extends AbstractEntity {
 	}
 
 	@Override
+	public String getKey() {
+		return getTypeName();
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
