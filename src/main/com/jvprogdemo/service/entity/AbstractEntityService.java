@@ -17,13 +17,16 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
 	}
 	protected abstract AbstractDao<T> initializeDao();
 	public abstract Collection<T> getEntities();
-	public abstract T getByKey(String key);
+
+	public T getByKey(String key) {
+		return MAP_CACHE.get(key.toUpperCase());
+	}
 
 	private Map<String, T> initializeDataMap() {
 		Collection<T> entities = DAO.getEntities();
 		Map<String, T> map = new HashMap<>();
 		for (T entity : entities) {
-			map.put(entity.getKey(), entity);
+			map.put(entity.getKey().toUpperCase(), entity);
 		}
 		return map;
 	}
