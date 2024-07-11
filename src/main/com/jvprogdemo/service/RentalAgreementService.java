@@ -33,7 +33,7 @@ public class RentalAgreementService {
 		String toolTypeName = toolType.getTypeName();
 		String toolBrandName = tool.getBrandName();
 		int rentalDays = checkoutRequest.getRentalDays();
-		LocalDate checkoutDate = checkoutRequest.getCheckOutDate();
+		LocalDate checkoutDate = checkoutRequest.getCheckoutDate();
 		LocalDate dueDate = checkoutDate.plusDays(rentalDays);
 		BigDecimal dailyRentalCharge = toolType.getDailyCharge();
 		int chargeDays = calculateChargeDays(checkoutDate, dueDate, toolType);
@@ -78,7 +78,8 @@ public class RentalAgreementService {
 		int firstYear = checkoutDate.getYear();
 		int lastYear = dueDate.getYear();
 		// initial calculation below is number of holidays times number of WHOLE YEARS between checkout and due dates
-		int numOfHolidays = HOLIDAY_FUNCTIONS_MAP.size() * (firstYear == lastYear ? 0 : lastYear - firstYear - 1);
+		int numOfFullYears = firstYear == lastYear ? 0 : lastYear - firstYear - 1;
+		int numOfHolidays = HOLIDAY_FUNCTIONS_MAP.size() * numOfFullYears;
 		// now check for holidays on the first year and last year of the rental period
 		for (Function<Integer, LocalDate> func : HOLIDAY_FUNCTIONS_MAP.values()) {
 			if (func.apply(firstYear).isAfter(checkoutDate)) {

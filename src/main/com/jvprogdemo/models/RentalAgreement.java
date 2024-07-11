@@ -1,15 +1,12 @@
 package com.jvprogdemo.models;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+
+import static com.jvprogdemo.utils.FormatUtils.CURRENCY_FORMAT;
+import static com.jvprogdemo.utils.FormatUtils.DATE_FORMAT;
 
 public class RentalAgreement {
-	// I can't say I approve of 2-digit year formatting, but...
-	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yy");
-	private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
 
 	private final String toolCode;
 	private final String toolTypeName;
@@ -46,18 +43,19 @@ public class RentalAgreement {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder()
-				.append("Tool code: ").append(toolCode.toUpperCase())
-				.append("Tool type: ").append(toolTypeName)
-				.append("Tool brand: ").append(toolBrandName)
-				.append("Rental days: ").append(rentalDays)
-				.append("Check out date: ").append(DATE_FORMAT.format(checkoutDate))
-				.append("Due due date: ").append(DATE_FORMAT.format(dueDate))
-				.append("Daily rental charge: ").append(CURRENCY_FORMAT.format(dailyRentalCharge))
-				.append("Charge days: ").append(chargeDays)
-				.append("Pre-discount charge: ").append(CURRENCY_FORMAT.format(preDiscountCharge))
-				.append("Discount percent: ").append(discountPercent).append('%')
-				.append("Discount amount: ").append(CURRENCY_FORMAT.format(discountAmount))
-				.append("Final charge: ").append(CURRENCY_FORMAT.format(finalCharge));
+				.append("Rental Agreement:\n")
+				.append('\t').append("Tool code: ").append(toolCode.toUpperCase()).append('\n')
+				.append('\t').append("Tool type: ").append(toolTypeName).append('\n')
+				.append('\t').append("Tool brand: ").append(toolBrandName).append('\n')
+				.append('\t').append("Rental days: ").append(rentalDays).append('\n')
+				.append('\t').append("Check out date: ").append(DATE_FORMAT.format(checkoutDate)).append('\n')
+				.append('\t').append("Due due date: ").append(DATE_FORMAT.format(dueDate)).append('\n')
+				.append('\t').append("Daily rental charge: ").append(CURRENCY_FORMAT.format(dailyRentalCharge)).append('\n')
+				.append('\t').append("Charge days: ").append(chargeDays).append('\n')
+				.append('\t').append("Pre-discount charge: ").append(CURRENCY_FORMAT.format(preDiscountCharge)).append('\n')
+				.append('\t').append("Discount percent: ").append(discountPercent).append('%').append('\n')
+				.append('\t').append("Discount amount: ").append(CURRENCY_FORMAT.format(discountAmount)).append('\n')
+				.append('\t').append("Final charge: ").append(CURRENCY_FORMAT.format(finalCharge)).append('\n');
 		return builder.toString();
 	}
 }

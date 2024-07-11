@@ -10,7 +10,8 @@ public class ToolDao extends AbstractDao<Tool> {
 	private static final Collection<Tool> DATA_TABLE_OBJECTS = Set.of(
 			new Tool("CHNS", "Chainsaw", "Stihl"),
 			new Tool("LADW", "Ladder", "Werner"),
-			new Tool("JAKD", "Jackhammer", "DeWalt")
+			new Tool("JAKD", "Jackhammer", "DeWalt"),
+			new Tool("JAKR", "Jackhammer", "Ridgid")
 	);
 
 	@Override

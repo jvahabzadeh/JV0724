@@ -1,9 +1,12 @@
 package com.jvprogdemo.models;
 
+import com.jvprogdemo.exceptions.NoSuchToolException;
 import com.jvprogdemo.models.entity.Tool;
 import com.jvprogdemo.service.entity.ToolService;
 
 import java.time.LocalDate;
+
+import static com.jvprogdemo.utils.FormatUtils.DATE_FORMAT;
 
 public class CheckoutRequest {
 	private static final ToolService TOOL_SERVICE = new ToolService();
@@ -11,10 +14,18 @@ public class CheckoutRequest {
 	private Tool tool;
 	private int rentalDays;
 	private int discountPercent;
-	private LocalDate checkOutDate;
+	private LocalDate checkoutDate;
 
-	public CheckoutRequest(String toolCode, int rentalDays, int discountPercent, LocalDate checkOutDate) {
-		validateToolCode(toolCode);
+	private CheckoutRequest(Tool tool, int rentalDays, int discountPercent, LocalDate checkoutDate) {
+		this.tool = tool;
+		this.rentalDays = rentalDays;
+		this.discountPercent = discountPercent;
+		this.checkoutDate = checkoutDate;
+	}
+
+	public static CheckoutRequest createCheckoutRequest(String toolCode, int rentalDays, int discountPercent,
+														LocalDate checkOutDate) throws NoSuchToolException {
+		Tool tmpTool = retrieveTool(toolCode);
 		if (rentalDays < 1) {
 			// TODO - possibly make this a non-runtime exception?
 			throw new IllegalArgumentException("Rental period must be at least 1 day.");
@@ -27,16 +38,19 @@ public class CheckoutRequest {
 			// TODO - possibly make this a non-runtime exception?
 			throw new IllegalArgumentException("A Check Out date is required.");
 		}
+		CheckoutRequest checkoutRequest = new CheckoutRequest(tmpTool, rentalDays, discountPercent, checkOutDate);
+		return checkoutRequest;
 	}
 
-	private void validateToolCode(String toolCode) {
+	private static Tool retrieveTool(String toolCode) throws NoSuchToolException {
 		if (toolCode == null || toolCode.isBlank()) {
 			throw new IllegalArgumentException("A Checkout Request requires a Tool Code.");
 		}
-		tool = TOOL_SERVICE.getByKey(toolCode);
-		if (tool == null) {
-			throw new IllegalArgumentException("There is no Tool with a Code of: " + toolCode);
+		Tool tmpTool = TOOL_SERVICE.getByKey(toolCode);
+		if (tmpTool == null) {
+			throw new NoSuchToolException("There is no Tool with a Code of: " + toolCode);
 		}
+		return tmpTool;
 	}
 
 	public Tool getTool() {
@@ -51,7 +65,19 @@ public class CheckoutRequest {
 		return discountPercent;
 	}
 
-	public LocalDate getCheckOutDate() {
-		return checkOutDate;
+	public LocalDate getCheckoutDate() {
+		return checkoutDate;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder()
+				.append("Checkout Request:\n")
+				.append('\t').append("Tool code: ").append(tool.getCode().toUpperCase()).append('\n')
+				.append('\t').append("Rental days: ").append(rentalDays).append('\n')
+				.append('\t').append("Discount percent: ").append(discountPercent).append('%').append('\n')
+				.append('\t').append("Check out date: ").append(DATE_FORMAT.format(checkoutDate)).append('\n')
+				;
+		return builder.toString();
 	}
 }
