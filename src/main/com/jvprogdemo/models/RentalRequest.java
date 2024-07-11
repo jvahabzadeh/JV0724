@@ -8,23 +8,23 @@ import java.time.LocalDate;
 
 import static com.jvprogdemo.utils.FormatUtils.DATE_FORMAT;
 
-public class CheckoutRequest {
+public class RentalRequest {
 	private static final ToolService TOOL_SERVICE = new ToolService();
 
-	private Tool tool;
-	private int rentalDays;
-	private int discountPercent;
-	private LocalDate checkoutDate;
+	private final Tool tool;
+	private final int rentalDays;
+	private final int discountPercent;
+	private final LocalDate checkoutDate;
 
-	private CheckoutRequest(Tool tool, int rentalDays, int discountPercent, LocalDate checkoutDate) {
+	private RentalRequest(Tool tool, int rentalDays, int discountPercent, LocalDate checkoutDate) {
 		this.tool = tool;
 		this.rentalDays = rentalDays;
 		this.discountPercent = discountPercent;
 		this.checkoutDate = checkoutDate;
 	}
 
-	public static CheckoutRequest createCheckoutRequest(String toolCode, int rentalDays, int discountPercent,
-														LocalDate checkOutDate) throws NoSuchToolException {
+	public static RentalRequest createRequest(String toolCode, int rentalDays, int discountPercent,
+											  LocalDate checkOutDate) throws NoSuchToolException {
 		Tool tmpTool = retrieveTool(toolCode);
 		if (rentalDays < 1) {
 			// TODO - possibly make this a non-runtime exception?
@@ -38,8 +38,7 @@ public class CheckoutRequest {
 			// TODO - possibly make this a non-runtime exception?
 			throw new IllegalArgumentException("A Check Out date is required.");
 		}
-		CheckoutRequest checkoutRequest = new CheckoutRequest(tmpTool, rentalDays, discountPercent, checkOutDate);
-		return checkoutRequest;
+		return new RentalRequest(tmpTool, rentalDays, discountPercent, checkOutDate);
 	}
 
 	private static Tool retrieveTool(String toolCode) throws NoSuchToolException {

@@ -39,7 +39,6 @@ public class RentalAgreement {
 		this.finalCharge = finalCharge;
 	}
 
-	// maybe a separate method would be better rather than overriding toString
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder()
@@ -57,5 +56,53 @@ public class RentalAgreement {
 				.append('\t').append("Discount amount: ").append(CURRENCY_FORMAT.format(discountAmount)).append('\n')
 				.append('\t').append("Final charge: ").append(CURRENCY_FORMAT.format(finalCharge)).append('\n');
 		return builder.toString();
+	}
+
+	public String getToolCode() {
+		return toolCode;
+	}
+
+	public String getToolTypeName() {
+		return toolTypeName;
+	}
+
+	public String getToolBrandName() {
+		return toolBrandName;
+	}
+
+	public int getRentalDays() {
+		return rentalDays;
+	}
+
+	public LocalDate getCheckoutDate() {
+		return checkoutDate;
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public BigDecimal getDailyRentalCharge() {
+		return dailyRentalCharge;
+	}
+
+	public int getChargeDays() {
+		return chargeDays;
+	}
+
+	public BigDecimal getPreDiscountCharge() {
+		return preDiscountCharge;
+	}
+
+	public int getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public BigDecimal getFinalCharge() {
+		return finalCharge;
 	}
 }
