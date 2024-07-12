@@ -6,7 +6,6 @@ import java.time.Month;
 
 public class LocalDateUtils {
 	public static int getNumOfWeekendDays(LocalDate startDateExclusive, int numOfDays) {
-		// TODO - REALLY need to look over this implementation more carefully
 		int weekendDays = 0;
 		if (numOfDays > 0) {
 			int numOfFullWeeks = numOfDays / 7;
@@ -14,17 +13,19 @@ public class LocalDateUtils {
 			int leftoverDays = numOfDays % 7;
 			// if leftover days are 0, we're done.
 			if (leftoverDays > 0) {
-				DayOfWeek dayOfWeek = startDateExclusive.getDayOfWeek();
-				DayOfWeek endDayOfWeek = dayOfWeek.plus(leftoverDays);
+				DayOfWeek dayOfWeekStart = startDateExclusive.getDayOfWeek();
+				DayOfWeek dayOfWeekEnd = dayOfWeekStart.plus(leftoverDays);
+				// there might be more clever ways to do this, but this loop will ALWAYS be very short, is dead simple,
+				// and easy to understand
 				do {
-					dayOfWeek = dayOfWeek.plus(1);
-					switch (dayOfWeek) {
+					dayOfWeekStart = dayOfWeekStart.plus(1);
+					switch (dayOfWeekStart) {
 						case SATURDAY:
 						case SUNDAY:
 							weekendDays++;
 							break;
 					}
-				} while (!dayOfWeek.equals(endDayOfWeek));
+				} while (!dayOfWeekStart.equals(dayOfWeekEnd));
 			}
 		}
 		return weekendDays;
