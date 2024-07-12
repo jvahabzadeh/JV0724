@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -71,8 +70,6 @@ class LocalDateUtilsTest {
 
 	@Test
 	void getNumOfWeekendDays() {
-		// TODO - REALLY need to look over this unit test more thoroughly, and add more test cases
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMMM d, yyyy : EEEE");
 		LocalDate startDate = LocalDate.of(2024, Month.JULY, 1); // a Monday, so first rental day is Tuesday
 		for (int days = 0; days < 100; days++) {
 			LocalDate endDate = startDate.plusDays(days);
@@ -86,8 +83,8 @@ class LocalDateUtilsTest {
 					expected += 2;
 				}
 			}
-			System.out.println("START: " + fmt.format(startDate) + " -- END: " + fmt.format(endDate) + " -- Weekend " +
-					"Days expected: " + expected + "   actual: " + weekendDays);
+//			System.out.println("START: " + fmt.format(startDate) + " -- END: " + fmt.format(endDate) + " -- Weekend " +
+//					"Days expected: " + expected + "   actual: " + weekendDays);
 			assertEquals(expected, weekendDays);
 		}
 
@@ -101,8 +98,8 @@ class LocalDateUtilsTest {
 					expected++;
 				}
 			}
-			System.out.println("START: " + fmt.format(startDate) + " -- END: " + fmt.format(endDate) + " -- Weekend " +
-					"Days expected: " + expected + "   actual: " + weekendDays);
+//			System.out.println("START: " + fmt.format(startDate) + " -- END: " + fmt.format(endDate) + " -- Weekend " +
+//					"Days expected: " + expected + "   actual: " + weekendDays);
 			assertEquals(expected, weekendDays);
 		}
 	}
